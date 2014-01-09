@@ -19,71 +19,75 @@ namespace DiscCalc
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //radFreq.Focus();
+            radFreq.Focus();
         }
 
         private void btnCalc_Click(object sender, EventArgs e)
         {
-            double answer;
-            if (txtSubtotal.Text == "")
+            try
             {
-                MessageBox.Show("No subtotal! Oh no!");
-            }
-            else
-            {
-                double subtotal = Convert.ToDouble(txtSubtotal.Text);
-
-                if (subtotal >= 0)
+                double answer;
+                if (txtSubtotal.Text == "")
                 {
-                    //double answer;
-                    //double subtotal = Convert.ToDouble(txtSubtotal.Text);                
-
-                    if (radMisc.Checked == true)
-                    {
-                        if (txtMisc.Text == "")
-                        {
-                            MessageBox.Show("No value!");
-                        }
-                        else
-                        {
-                            double miscel = Convert.ToDouble(txtMisc.Text);
-                            double temp = (miscel / 100);
-
-                            answer = subtotal * temp;
-                            lblAmount.Text = answer.ToString("0.00");
-                        }
-                    }
-                    else if (radEmp.Checked == true)
-                    {
-                        answer = subtotal * .30;
-                        lblAmount.Text = answer.ToString("0.00");
-                    }
-                    else if (radFreq.Checked == true)
-                    {
-                        answer = subtotal * .20;
-                        lblAmount.Text = answer.ToString("0.00");
-                    }
-                    else if (radK2k.Checked == true)
-                    {
-                        answer = subtotal * .15;
-                        lblAmount.Text = answer.ToString("0.00");
-                    }
-                    else if (radMil.Checked == true)
-                    {
-                        answer = subtotal * .10;
-                        lblAmount.Text = answer.ToString("0.00");
-                    }
+                    MessageBox.Show("No subtotal! Oh no!");
                 }
                 else
                 {
-                    MessageBox.Show("Please enter a positive integer");
+                    double subtotal = Convert.ToDouble(txtSubtotal.Text);
+
+                    if (subtotal >= 0)
+                    {
+                        if (radMisc.Checked == true)
+                        {
+                            if (txtMisc.Text == "")
+                            {
+                                MessageBox.Show("No value!");
+                            }
+                            else
+                            {
+                                double miscel = Convert.ToDouble(txtMisc.Text);
+                                double temp = (miscel / 100);
+
+                                answer = subtotal * temp;
+                                lblAmount.Text = string.Format("{0:C}", answer);
+                            }
+                        }
+                        else if (radEmp.Checked == true)
+                        {
+                            answer = subtotal * .30;
+                            lblAmount.Text = string.Format("{0:C}", answer);
+                        }
+                        else if (radFreq.Checked == true)
+                        {
+                            answer = subtotal * .20;
+                            lblAmount.Text = string.Format("{0:C}", answer);
+                        }
+                        else if (radK2k.Checked == true)
+                        {
+                            answer = subtotal * .15;
+                            lblAmount.Text = string.Format("{0:C}", answer);
+                        }
+                        else if (radMil.Checked == true)
+                        {
+                            answer = subtotal * .10;
+                            lblAmount.Text = string.Format("{0:C}", answer);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Please enter a positive integer");
+                    }
                 }
+            }
+            catch
+            {
+                MessageBox.Show("Please be sure only integers or decimals are inputted.");
             }
         }
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            Close();
         }
 
         private void btnClear_Click(object sender, EventArgs e)
